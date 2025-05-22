@@ -1,4 +1,6 @@
 from random import choice, randint
+import numpy as np
+
 
 def MontyHallSimulation(doors):
     if doors < 2:
@@ -16,7 +18,6 @@ def MontyHallSimulation(doors):
         return True
     return False
 
-
 def main():
     win = 0
     lose = 0
@@ -26,10 +27,8 @@ def main():
     simulations = int(input("How many simpulations would you like to do: "))
     while simulations < 1:
         simulations = int(input("You need to try at least one simulation, Enter the number of simulations again: "))
-    for _ in range(1000000):
+    for _ in range(simulations):
         simu = MontyHallSimulation(doors)
-            
-        
         if simu:
             win += 1
         else:
