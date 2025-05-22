@@ -23,6 +23,9 @@ def main():
     doors = int(input("How many doors would you like to have in the game show: "))
     while doors < 2:
         doors = int(input("That is an invalid number of doors. there needs to be at least 2 so you can switch at the end: "))
+    simulations = int(input("How many simpulations would you like to do: "))
+    while simulations < 1:
+        simulations = int(input("You need to try at least one simulation, Enter the number of simulations again: "))
     for _ in range(1000000):
         simu = MontyHallSimulation(doors)
             
