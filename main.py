@@ -1,25 +1,33 @@
-import random
+from random import choice, randint
+
+def MontyHallSimulation(doors):
+    if doors < 2:
+        print("Sorry that is invalid")
+        raise ValueError
+    correct = randint(0,doors - 1)
+    selection = randint(0, doors - 1)
+    chosen = [correct, selection]
+    eliminations = []
+    for _ in range(doors - 2):
+        eliminated = choice([i for i in range(0, doors) if i not in chosen and i not in eliminations])
+        eliminations.append(eliminated)
+    selection = choice([i for i in range(0, doors) if i not in eliminations and i != selection])
+    if selection == correct:
+        return True
+    return False
+
 
 def main():
     win = 0
     lose = 0
-    for _ in range(100000):
-        correct = random.randint(0,4)
-        selection = random.randint(0,4)
-        eliminate = random.randint(0,4)
-        while eliminate == correct or eliminate == selection:
-            eliminate = random.randint(0,4)
-        eliminate2 = random.randint(0,4)
-        while eliminate2 == correct or eliminate2 == selection or eliminate2 == eliminate:
-            eliminate2 = random.randint(0,4)
-        eliminate3 = random.randint(0,4)
-        while eliminate3 == correct or eliminate3 == selection or eliminate3 == eliminate or eliminate3 == eliminate2:
-            eliminate3 = random.randint(0,4)
-        old_select = selection
-        while selection == old_select or selection == eliminate or selection == eliminate2 or selection == eliminate3:
-            selection = random.randint(0,4)
+    doors = int(input("How many doors would you like to have in the game show: "))
+    while doors < 2:
+        doors = int(input("That is an invalid number of doors. there needs to be at least 2 so you can switch at the end: "))
+    for _ in range(1000000):
+        simu = MontyHallSimulation(doors)
+            
         
-        if selection == correct:
+        if simu:
             win += 1
         else:
             lose += 1
